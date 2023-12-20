@@ -124,6 +124,14 @@ Facebook,0
 Plakater på campus,0
 Instagram,1
 
+question,Hva er ditt helhetsinntrykk av arrangementet?
+value:,count:
+5 - veldig bra,1
+4,2
+3,3
+2,4
+1 - veldig dårlig,5
+
 Om minglingen: Hva kunne vært bedre og hvordan?
 answer:
 De virket interessert i å snakke med oss deltakere.
