@@ -1,0 +1,47 @@
+{% extends "index.html" %} {% block title %}statistikk{% endblock  %}
+{% block content %}
+<h1>statistikk</h1>
+<table border='1'>
+
+    <tr>
+      <th>Bedpres</th>
+      <th>helhetsinntrykk</th>
+      <th>andel kvinner / menn</th>
+      <th>andel data / komtek</th>
+      <th>andel interreserte / ikke</th>
+      <th>fordeling klassetrinn</th>
+      <th>framføring av presentasjonen</th>
+      <th>innholdet på presentasjonen</th>
+      <th>kunnskap om bedriften før</th>
+      <th>kunnskap om bedrift etter</th>
+      <th>info om jobbmuligheter</th>
+      <th>minglingen</th>
+      <th>interesant arbeid</th>
+      <th>sosialt miljø</th>
+      <th>arbeidsvilkår</th>
+      <th>vurdering av bedrift</th>
+
+    </tr>
+    {% for x in bedriftdata %}
+      <tr>
+        <td>{{ x.navn_bedrift }}</td>
+        <td>{{ x.inntrykk_arrangement }}</td>
+        <td>{{ x.andel_kvinner }}</td>
+        <td>{{ x.andel_data }}</td>
+        <td>{{ x.andel_interreserte }}</td>
+        <td>{{ x.fordeling_klassetrinn }}</td>
+        <td>{{ x.fremforing_presentasjon }}</td>
+        <td>{{ x.innhold_presentasjon }}</td>
+        <td>{{ x.kunnskap_bedrift_pre }}</td>
+        <td>{{ x.kunnskap_bedrift_post }}</td>
+        <td>{{ x.info_jobb }}</td>
+        <td>{{ x.mingling }}</td>
+        <td>{{ x.intterresant_arbeid }}</td>
+        <td>{{ x.sosialt_miljø }}</td>
+        <td>{{ x.arbeidsvilkår }}</td>
+        <td>{{ x.helhetsvurdering }}</td>
+      </tr>
+
+    {% endfor %}
+  </table>
+{% endblock  %}
