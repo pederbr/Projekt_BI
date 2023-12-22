@@ -16,3 +16,11 @@ def statistikk(request):
     'bedriftdata': mydata,
   }
   return HttpResponse(template.render(context, request))
+
+def upload(request):
+  mydata = bedrift_data.objects.all()
+  template = loader.get_template('upload.html')
+  context = {
+    'bedriftdata': mydata,
+  }
+  return HttpResponse(template.render(context, request))
