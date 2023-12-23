@@ -1,3 +1,9 @@
 {% extends "index.html" %} {% block title %}last opp fil{% endblock  %}
 {% block content %}
+    <h1>last opp CSV-fil fra bedrift</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="docfile">
+        <button type="submit">Upload</button>
+    </form>
 {% endblock  %}
