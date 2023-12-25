@@ -5,7 +5,7 @@ import pandas as pd
 class filForm(forms.ModelForm):
     class Meta:
         model = opplastede_filer
-        fields = ["navn", "fil", "dato_lagret"]
+        fields = ["navn", "fil"]
 
 def avg_values(filename:str)->tuple:
 
