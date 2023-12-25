@@ -20,26 +20,31 @@ def upload(request):
       document=form.save()
       dataframe = pd.read_csv(document.fil)
       tp = process_csv(dataframe)
-      new_entry=bedrift_data(
-         navn_bedrift=request.POST["navn"], 
-         andel_kvinner = tp[0], 
-         andel_data = tp[1], 
-         andel_interreserte = tp[2], 
-         fordeling_klassetrinn = tp[3], 
-         fremforing_presentasjon = tp[4], 
-         innhold_presentasjon = tp[5], 
-         kunnskap_bedrift_pre = tp[6], 
-         kunnskap_bedrift_post = tp[7], 
-         info_jobb = tp[8], 
-         mingling = tp[9], 
-         intterresant_arbeid = tp[10], 
-         sosialt_miljø = tp[11], 
-         arbeidsvilkår = tp[12], 
-         helhetsvurdering = tp[13], 
-         inntrykk_arrangement = tp[14]
-         )
-      new_entry.save()
-      return redirect("statistikk")
+      if len(tp)==15:
+         try:
+          new_entry=bedrift_data(
+            navn_bedrift=request.POST["navn"], 
+            andel_kvinner = tp[0], 
+            andel_data = tp[1], 
+            andel_interreserte = tp[2], 
+            fordeling_klassetrinn = tp[3], 
+            fremforing_presentasjon = tp[4], 
+            innhold_presentasjon = tp[5], 
+            kunnskap_bedrift_pre = tp[6], 
+            kunnskap_bedrift_post = tp[7], 
+            info_jobb = tp[8], 
+            mingling = tp[9], 
+            intterresant_arbeid = tp[10], 
+            sosialt_miljø = tp[11], 
+            arbeidsvilkår = tp[12], 
+            helhetsvurdering = tp[13], 
+            inntrykk_arrangement = tp[14]
+            )
+          new_entry.save()
+          return redirect("statistikk")
+         except:
+          form=filForm() 
+          data_from_file=tuple()
   else:
     form=filForm() 
     data_from_file=tuple()
@@ -97,11 +102,15 @@ def process_csv(df)->tuple:
         question=elem.values.tolist()
         summ = 0
         votes = 0
-        for index, score in enumerate(question):
-            points = 5-index
-            votes += int(score[1])
-            summ += points*int(score[1])
-        temp1.append(round((summ/votes),2))
+        try:
+            for index, score in enumerate(question):
+                points = 5-index
+                votes += int(score[1])
+                summ += points*int(score[1])
+            temp1.append(round((summ/votes),2))
+        except:
+            temp1.append(temp1[len(temp1)-1])
+
 
     average_score_questions=tuple(temp+temp1)
     return average_score_questions
