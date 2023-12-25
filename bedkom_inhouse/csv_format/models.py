@@ -1,5 +1,11 @@
 from django.db import models
 
+class opplastede_filer(models.Model):
+    navn = models.CharField(max_length=255)
+    fil = models.FileField(upload_to="static/CSV")
+    dato_lagret = models.DateTimeField()
+    def __str__(self):
+        return self.navn
 
 class bedrift_data(models.Model):
 

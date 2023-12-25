@@ -124,6 +124,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT=os.path.join(BASE_DIR, "csv_format/static/tildigere_bedpres/")
+MEDIA_ROOT=os.path.join(BASE_DIR, "csv_format/static/CSV/")
 
-MEDIA_URL="csv_format/static/tildigere_bedpres/"
+MEDIA_URL="/CSV/"
