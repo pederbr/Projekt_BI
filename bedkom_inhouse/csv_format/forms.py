@@ -1,15 +1,11 @@
 from django import forms
+from .models import opplastede_filer
 import pandas as pd
 
-
-class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    file = forms.FileField()
-    
-def handle_uploaded_file(f):
-    with open("some/file/name.txt", "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+class filForm(forms.ModelForm):
+    class Meta:
+        model = opplastede_filer
+        fields = ["navn", "fil"]
 
 def avg_values(filename:str)->tuple:
 

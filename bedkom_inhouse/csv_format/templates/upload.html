@@ -3,7 +3,7 @@
     <h1>last opp CSV-fil fra bedrift</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="docfile">
-        <button type="submit">Upload</button>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">last opp fil </button>
     </form>
 {% endblock  %}
