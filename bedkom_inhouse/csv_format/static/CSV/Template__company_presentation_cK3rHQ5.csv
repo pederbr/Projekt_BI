@@ -1,0 +1,146 @@
+question,Kjønn
+value:,count:
+Kvinne,0
+Mann,0
+Annet,0
+
+question,Linje
+value:,count:
+Datateknologi,0
+Kommunikasjonsteknologi og digital sikkerhet,0
+
+question,Klassetrinn
+value:,count:
+5.,0
+4.,0
+3.,0
+2.,0
+1.,0
+
+question,Virker de daglige arbeidsoppgavene til bedriften interessante?
+value:,count:
+Veldig interessant,0
+Interessant,0
+Noe interessant,0
+Lite interessant,0
+Ikke interessant,0
+
+question,Hvilke av disse egenskapene tror du bedriften kan tilby?
+value:,count:
+Profesjonell opplæring,0
+Konkurransedyktig lønn,0
+Innovasjon,0
+Vennlig jobbmiljø,0
+Kreativt og dynamisk jobbmiljø,0
+Attraktive produkter og tjenester,0
+Ingen av alternativene,0
+
+question,Hva er ditt inntrykk av det sosiale miljøet i bedriften?
+value:,count:
+Veldig bra,0
+Bra,0
+Middels,0
+Dårlig,0
+Veldig dårlig,0
+
+question,Kunne du tenke deg å jobbe for denne bedriften?
+value:,count:
+Ja,0
+Nei,0
+
+question,Hva er ditt inntrykk av arbeidsvilkårene i bedriften?
+value:,count:
+Veldig bra,0
+Bra,0
+Middels,0
+Dårlig,0
+Veldig dårlig,0
+
+question,Hva er din helhetsvurdering av bedriften?
+value:,count:
+Veldig interessant,0
+Interessant,0
+Ok,0
+Lite interessant,0
+Ikke interessant,0
+
+question,Hvordan gikk minglingen etter presentasjonen?
+value:,count:
+Veldig bra,0
+Bra,0
+Middels,0
+Dårlig,0
+Veldig dårlig,0
+
+question,Hva synes du om innholdet i presentasjonen?
+value:,count:
+Veldig bra,0
+Bra,0
+Middels,0
+Dårlig,0
+Veldig dårlig,0
+
+question,Hva synes du om fremføringen av presentasjonen?
+value:,count:
+Veldig bra,0
+Bra,0
+Middels,0
+Dårlig,0
+Veldig dårlig,0
+
+question,Hvor mye visste du om bedriften før presentasjonen?
+value:,count:
+Veldig mye,0
+Mye,0
+Noe,0
+Lite,0
+Veldig lite,0
+
+question,Hva vet du om bedriften etter presentasjonen?
+value:,count:
+Veldig mye,0
+Mye,0
+Noe,0
+Lite,0
+Veldig lite,0
+
+question,Hvordan var informasjonen om sommerjobber og ledige stillinger?
+value:,count:
+Svært god,0
+God,0
+Ok,0
+Mangelfull,0
+Svært mangelfull,0
+
+question,Hvordan fikk du høre om bedriftspresentasjonen? - Følg @abakusbedrift for oppdateringer om flere arrangementer!
+value:,count:
+#Weekly på abakus.no,0
+Abakus.no,0
+Annet,0
+Plakater,0
+Medlemmer av Bedkom,0
+Venner,0
+Facebook,0
+Plakater på campus,0
+Instagram - @abakusbedrift,0
+
+question,Hva er ditt helhetsinntrykk av arrangementet?
+value:,count:
+5 - veldig bra,0
+4,0
+3,0
+2,0
+1 - veldig dårlig,0
+
+Om minglingen: Hva kunne vært bedre og hvordan?
+answer:
+
+Om presentasjonen: Hva kunne vært bedre og hvordan?
+answer:
+
+Hva kunne du tenke deg at bedriften skal prate om ved neste anledning?
+answer:
+
+Har du noen sluttkommentarer om hva som var bra eller hva som kunne vært bedre? Spesifiser om det er til bedriften eller Bedkom.
+answer:
+
