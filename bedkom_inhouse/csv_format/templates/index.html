@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'media/bedkom.png' %}">
   <title>{% block title %}BEDKOM INHOUSE{% endblock %}</title> 
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light mb-4">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">BEDKOM INHOUSE</a>
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'media/bedkom.png' %}" alt="BEDKOM INHOUSE" height="50px"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
