@@ -2,10 +2,8 @@ from urllib import request
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect, render
-from django.core.files.storage import FileSystemStorage
 from .models import bedrift_data
 from .forms import filForm
-from django.contrib.staticfiles.storage import staticfiles_storage
 import pandas as pd
 
 def home(request):
@@ -16,35 +14,38 @@ def upload(request):
   if request.method == "POST":
     form = filForm(request.POST, request.FILES)
     data_from_file=tuple()
+    print(request.POST["dato_bedpres"])
     if form.is_valid():
       document=form.save()
       dataframe = pd.read_csv(document.fil)
-      tp = process_csv(dataframe)
-      if len(tp)==15:
-         try:
-          new_entry=bedrift_data(
-            navn_bedrift=request.POST["navn"], 
-            andel_kvinner = tp[0], 
-            andel_data = tp[1], 
-            andel_interreserte = tp[2], 
-            fordeling_klassetrinn = tp[3], 
-            fremforing_presentasjon = tp[4], 
-            innhold_presentasjon = tp[5], 
-            kunnskap_bedrift_pre = tp[6], 
-            kunnskap_bedrift_post = tp[7], 
-            info_jobb = tp[8], 
-            mingling = tp[9], 
-            intterresant_arbeid = tp[10], 
-            sosialt_miljø = tp[11], 
-            arbeidsvilkår = tp[12], 
-            helhetsvurdering = tp[13], 
-            inntrykk_arrangement = tp[14]
-            )
-          new_entry.save()
-          return redirect("statistikk")
-         except:
-          form=filForm() 
-          data_from_file=tuple()
+      try:
+        tp = process_csv(dataframe)
+        if len(tp)==15: #sjekker om fila er behandlet på riktig måte
+            new_entry=bedrift_data( #laster opp data fra tuplen til modellen
+              dato_bedpres = (request.POST["dato_bedpres"]),
+              navn_bedrift = request.POST["navn"], 
+              andel_kvinner = tp[0], 
+              andel_data = tp[1], 
+              andel_interreserte = tp[2], 
+              fordeling_klassetrinn = tp[3], 
+              fremforing_presentasjon = tp[4], 
+              innhold_presentasjon = tp[5], 
+              kunnskap_bedrift_pre = tp[6], 
+              kunnskap_bedrift_post = tp[7], 
+              info_jobb = tp[8], 
+              mingling = tp[9], 
+              intterresant_arbeid = tp[10], 
+              sosialt_miljø = tp[11], 
+              arbeidsvilkår = tp[12], 
+              helhetsvurdering = tp[13], 
+              inntrykk_arrangement = tp[14]
+              )
+            new_entry.save()
+            return redirect("statistikk")
+      except:
+        form=filForm() 
+        data_from_file=tuple()
+        return redirect("statistikk/noe_feil_med_input")
   else:
     form=filForm() 
     data_from_file=tuple()
@@ -59,11 +60,17 @@ def statistikk(request):
   }
   return HttpResponse(template.render(context, request))
 
+def del_bedpres(request):
+    id = int(request.GET.get('id'))
+    try:
+        mydata = bedrift_data.objects.get(id=id)
+        mydata.delete()
+    except bedrift_data.DoesNotExist:
+        pass
+    return redirect("statistikk")
 
 
 def process_csv(df)->tuple:
-
-
     #svarene på enten/eller spm
     q_list_1=[   
     df.loc[1:2],    #prosentandel kvinner

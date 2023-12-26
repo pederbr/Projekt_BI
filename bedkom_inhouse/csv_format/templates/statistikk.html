@@ -1,8 +1,20 @@
 {% extends "index.html" %} {% block title %}statistikk{% endblock  %}
 {% block content %}
 <h1>statistikk</h1>
+<ul class="navbar-nav">
+  <li class="nav-item active">
+    <a class="nav-link" href="#">VÅR 24</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">HØST 23</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">VÅR 23</a>
+  </li>
+</ul>
 <table border='1'>
     <tr>
+      <th>dato</th>
       <th>Bedpres</th>
       <th>helhetsinntrykk</th>
       <th>andel kvinner / menn</th>
@@ -19,10 +31,12 @@
       <th>sosialt miljø</th>
       <th>arbeidsvilkår</th>
       <th>vurdering av bedrift</th>
+      <th>Slett bepres</th>
 
     </tr>
     {% for x in bedriftdata %}
       <tr>
+        <td>{{ x.dato_bedpres }}</td>
         <td>{{ x.navn_bedrift }}</td>
         <td>{{ x.inntrykk_arrangement }}</td>
         <td>{{ x.andel_kvinner }}</td>
@@ -39,8 +53,14 @@
         <td>{{ x.sosialt_miljø }}</td>
         <td>{{ x.arbeidsvilkår }}</td>
         <td>{{ x.helhetsvurdering }}</td>
+        <td> 
+          <form action="{% url 'del_bedpres' %}?id={{ x.id }}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ x.id }}" />
+            <button type="submit" class="btn btn-default btn-sm" onclick="return confirm('sikker på at du vil slette denne?');">slett</button>
+          </form>
+        </td>
       </tr>
-
     {% endfor %}
   </table>
 {% endblock  %}
