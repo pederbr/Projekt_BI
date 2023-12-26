@@ -10,8 +10,14 @@ class opplastede_filer(models.Model):
     def __str__(self):
         return self.navn
 
+class semestere(models.Model):
+    semester= models.CharField(max_length=255, default="h23")
+    def __str__(self):
+        return self.semester
+
 class bedrift_data(models.Model):
     dato_bedpres = models.DateField()
+    semester= models.CharField(max_length=255, default="h23")
     navn_bedrift = models.CharField(max_length=255)
     andel_kvinner = models.FloatField()
     andel_data = models.FloatField()

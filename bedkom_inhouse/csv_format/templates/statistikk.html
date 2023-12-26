@@ -3,10 +3,12 @@
 <h1>statistikk</h1>
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    velg Semester
+    {{ semester }}  
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">HØST 23</a>
+    {% for x in alle_semestre %}
+      <a class="dropdown-item" href="{% url 'statistikk' %}?id={{ x.semester }}">{{ x.semester }}</a>
+    {% endfor %}
   </div>
 </div>
 <div>
@@ -56,7 +58,7 @@
         <td class="equal-width" > 
           <form action="{% url 'del_bedpres' %}?id={{ x.id }}" method="post" style="display: inline;">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('sikker på at du vil slette denne?');">slett</button>
+            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('sikker på at du vil bedpressen ved navn {{x.navn_bedrift}}?');">slett</button>
           </form>
         </td>
       </tr>

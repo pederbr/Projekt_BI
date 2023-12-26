@@ -1,6 +1,7 @@
 from django import forms
-from .models import opplastede_filer
+from .models import opplastede_filer, semestere
 import pandas as pd
+import datetime as dt
 
 class filForm(forms.ModelForm):
     class Meta:
@@ -65,3 +66,17 @@ def process_csv(df)->tuple:
     average_score_questions=tuple(temp+temp1)
     return average_score_questions
 
+
+def get_semester(date_str:str)->str:
+    date=dt.datetime.strptime(date_str, "%Y-%m-%d").date()
+    year=str(date.year)
+    semester=""
+    if date.month in [1,2,3,4,5,6]:
+        semester="v"+year[2:4]
+    elif date.month in [7,8,9,10,11,12]:
+        semester="h"+year[2:4]
+    if semester:
+        obj, created = semestere.objects.get_or_create(semester=semester)
+        if created:
+            obj.save()
+    return semester

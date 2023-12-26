@@ -2,8 +2,8 @@ from urllib import request
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect, render
-from .models import bedrift_data
-from .forms import filForm, process_csv
+from .models import bedrift_data, semestere
+from .forms import filForm, process_csv, get_semester
 import pandas as pd
 from django.contrib import messages
 
@@ -26,6 +26,7 @@ def upload(request):
               new_entry=bedrift_data( #laster opp data fra tuplen til modellen
                 dato_bedpres = request.POST["dato_bedpres"],
                 navn_bedrift = request.POST["navn"], 
+                semester = get_semester(request.POST["dato_bedpres"]),
                 andel_kvinner = tp[0], 
                 andel_data = tp[1], 
                 andel_interreserte = tp[2], 
@@ -41,6 +42,7 @@ def upload(request):
                 arbeidsvilkår = tp[12], 
                 helhetsvurdering = tp[13], 
                 inntrykk_arrangement = tp[14]
+
                 )
               new_entry.save()
               return redirect("statistikk")
@@ -56,19 +58,25 @@ def upload(request):
 
 
 def statistikk(request):
-  mydata = bedrift_data.objects.all()
+  semester = (request.GET.get('id'))
+  bedriftdata = bedrift_data.objects.filter(semester=semester)
+  alle_semestre = semestere.objects.all()
   template = loader.get_template('statistikk.html')
   context = {
-    'bedriftdata': mydata,
+    'alle_semestre': alle_semestre,
+    'bedriftdata': bedriftdata,
+    'semester': semester
   }
   return HttpResponse(template.render(context, request))
 
 def del_bedpres(request):
     id = int(request.GET.get('id'))
+    semester=bedrift_data.objects.get(id=id).semester
     try:
         mydata = bedrift_data.objects.get(id=id)
         mydata.delete()
     except bedrift_data.DoesNotExist:
         pass
-    return redirect("statistikk")
+        
+    return redirect("statistikk", id=semester)
 
