@@ -1,5 +1,6 @@
 from django import forms
-from .models import opplastede_filer, semestere
+from numpy import true_divide
+from .models import opplastede_filer, semestere, bedrift_data
 import pandas as pd
 import datetime as dt
 
@@ -13,6 +14,10 @@ class filForm(forms.ModelForm):
         )
         }
 
+def check_semester():
+    for semester in semestere.objects.all():
+        if not bedrift_data.objects.filter(semester=semester).exists():
+            semestere.objects.filter(semester=semester).delete()
 
 def process_csv(df)->tuple:
     #svarene på enten/eller spm

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect, render
 from .models import bedrift_data, semestere
-from .forms import filForm, process_csv, get_semester
+from .forms import filForm, process_csv, get_semester, check_semester
 import pandas as pd
 from django.contrib import messages
 
@@ -58,7 +58,10 @@ def upload(request):
 
 
 def statistikk(request):
-  semester = (request.GET.get('id'))
+  if request.GET.get('id'):
+    semester = (request.GET.get('id'))
+  else: 
+    semester = "v24"
   bedriftdata = bedrift_data.objects.filter(semester=semester)
   alle_semestre = semestere.objects.all()
   template = loader.get_template('statistikk.html')
@@ -70,13 +73,12 @@ def statistikk(request):
   return HttpResponse(template.render(context, request))
 
 def del_bedpres(request):
-    id = int(request.GET.get('id'))
-    semester=bedrift_data.objects.get(id=id).semester
-    try:
-        mydata = bedrift_data.objects.get(id=id)
-        mydata.delete()
-    except bedrift_data.DoesNotExist:
-        pass
-        
-    return redirect("statistikk", id=semester)
+  id = int(request.GET.get('id'))
+  try:
+      mydata = bedrift_data.objects.get(id=id)
+      mydata.delete()
+  except bedrift_data.DoesNotExist:
+      pass
+  check_semester()
+  return redirect("statistikk")
 
