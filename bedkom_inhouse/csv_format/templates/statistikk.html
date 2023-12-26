@@ -13,48 +13,47 @@
   <br>
 </div>
 <div class="table-responsive">
-
-  <table class="table table-sm" border="1">
+  <table class="table table-sm small-font" border="1">
     <tr>
-      <th>dato</th>
-      <th>Bedpres</th>
-      <th>helhetsinntrykk</th>
-      <th>andel kvinner / menn</th>
-      <th>andel data / komtek</th>
-      <th>andel interreserte / ikke</th>
-      <th>fordeling klassetrinn</th>
-      <th>framføring av presentasjonen</th>
-      <th>innholdet på presentasjonen</th>
-      <th>kunnskap om bedriften før</th>
-      <th>kunnskap om bedrift etter</th>
-      <th>info om jobbmuligheter</th>
-      <th>minglingen</th>
-      <th>interesant arbeid</th>
-      <th>sosialt miljø</th>
-      <th>arbeidsvilkår</th>
-      <th>vurdering av bedrift</th>
-      <th>Slett bepres</th>
+      <th class="equal-width" >dato</th>
+      <th class="equal-width" >Bedpres</th>
+      <th class="equal-width" >helhetsinntrykk</th>
+      <th class="equal-width" >andel kvinner / menn</th>
+      <th class="equal-width" >andel data / komtek</th>
+      <th class="equal-width" >andel interreserte / ikke</th>
+      <th class="equal-width" >fordeling klassetrinn</th>
+      <th class="equal-width" >framføring av presentasjonen</th>
+      <th class="equal-width" >innholdet på presentasjonen</th>
+      <th class="equal-width" >kunnskap om bedriften før</th>
+      <th class="equal-width" >kunnskap om bedrift etter</th>
+      <th class="equal-width" >info om jobbmuligheter</th>
+      <th class="equal-width" >minglingen</th>
+      <th class="equal-width" >interesant arbeid</th>
+      <th class="equal-width" >sosialt miljø</th>
+      <th class="equal-width" >arbeidsvilkår</th>
+      <th class="equal-width" >vurdering av bedrift</th>
+      <th class="equal-width" >Slett bepres</th>
     </tr>
     {% for x in bedriftdata %}
       <tr>
-        <td>{{ x.dato_bedpres }}</td>
-        <td>{{ x.navn_bedrift }}</td>
-        <td>{{ x.inntrykk_arrangement }}</td>
-        <td>{{ x.andel_kvinner }}</td>
-        <td>{{ x.andel_data }}</td>
-        <td>{{ x.andel_interreserte }}</td>
-        <td>{{ x.fordeling_klassetrinn }}</td>
-        <td>{{ x.fremforing_presentasjon }}</td>
-        <td>{{ x.innhold_presentasjon }}</td>
-        <td>{{ x.kunnskap_bedrift_pre }}</td>
-        <td>{{ x.kunnskap_bedrift_post }}</td>
-        <td>{{ x.info_jobb }}</td>
-        <td>{{ x.mingling }}</td>
-        <td>{{ x.intterresant_arbeid }}</td>
-        <td>{{ x.sosialt_miljø }}</td>
-        <td>{{ x.arbeidsvilkår }}</td>
-        <td>{{ x.helhetsvurdering }}</td>
-        <td> 
+        <td class="equal-width" >{{ x.dato_bedpres }}</td>
+        <td class="equal-width" >{{ x.navn_bedrift }}</td>
+        <td class="equal-width" >{{ x.inntrykk_arrangement }}</td>
+        <td class="equal-width" >{{ x.andel_kvinner }}</td>
+        <td class="equal-width" >{{ x.andel_data }}</td>
+        <td class="equal-width" >{{ x.andel_interreserte }}</td>
+        <td class="equal-width" >{{ x.fordeling_klassetrinn }}</td>
+        <td class="equal-width" >{{ x.fremforing_presentasjon }}</td>
+        <td class="equal-width" >{{ x.innhold_presentasjon }}</td>
+        <td class="equal-width" >{{ x.kunnskap_bedrift_pre }}</td>
+        <td class="equal-width" >{{ x.kunnskap_bedrift_post }}</td>
+        <td class="equal-width" >{{ x.info_jobb }}</td>
+        <td class="equal-width" >{{ x.mingling }}</td>
+        <td class="equal-width" >{{ x.intterresant_arbeid }}</td>
+        <td class="equal-width" >{{ x.sosialt_miljø }}</td>
+        <td class="equal-width" >{{ x.arbeidsvilkår }}</td>
+        <td class="equal-width" >{{ x.helhetsvurdering }}</td>
+        <td class="equal-width" > 
           <form action="{% url 'del_bedpres' %}?id={{ x.id }}" method="post" style="display: inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('sikker på at du vil slette denne?');">slett</button>

@@ -1,0 +1,7 @@
+.small-font {
+    font-size: 0.8rem; /* Decrease font size */
+  }
+  
+  .equal-width {
+    width: 1fr; /* Set width of each column to the same value */
+  }
