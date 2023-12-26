@@ -1,0 +1,158 @@
+question,Kjønn
+value:,count:
+Kvinne,8
+Mann,29
+Annet,0
+
+question,Linje
+value:,count:
+Datateknologi,15
+Kommunikasjonsteknologi og digital sikkerhet,22
+
+question,Klassetrinn
+value:,count:
+5.,3
+4.,11
+3.,12
+2.,8
+1.,3
+
+question,Virker de daglige arbeidsoppgavene til bedriften interessante?
+value:,count:
+Veldig interessant,10
+Interessant,21
+Noe interessant,6
+Lite interessant,0
+Ikke interessant,0
+
+question,Hvilke av disse egenskapene tror du bedriften kan tilby?
+value:,count:
+Profesjonell opplæring,32
+Konkurransedyktig lønn,26
+Innovasjon,18
+Vennlig jobbmiljø,25
+Kreativt og dynamisk jobbmiljø,22
+Attraktive produkter og tjenester,16
+Ingen av alternativene,0
+
+question,Hva er ditt inntrykk av det sosiale miljøet i bedriften?
+value:,count:
+Bra,21
+Veldig bra,13
+Middels,3
+Dårlig,0
+Veldig dårlig,0
+
+question,Kunne du tenke deg å jobbe for denne bedriften?
+value:,count:
+Ja,34
+Nei,3
+
+question,Hva er ditt inntrykk av arbeidsvilkårene i bedriften?
+value:,count:
+Veldig bra,8
+Bra,25
+Middels,4
+Dårlig,0
+Veldig dårlig,0
+
+question,Hva er din helhetsvurdering av bedriften?
+value:,count:
+Interessant,19
+Veldig interessant,14
+Ok,4
+Lite interessant,0
+Ikke interessant,0
+
+question,Hvordan gikk minglingen etter presentasjonen?
+value:,count:
+Veldig bra,18
+Bra,16
+Middels,2
+Dårlig,1
+Veldig dårlig,0
+
+question,Hva synes du om innholdet i presentasjonen?
+value:,count:
+Veldig bra,11
+Bra,20
+Middels,5
+Dårlig,0
+Veldig dårlig,1
+
+question,Hva synes du om fremføringen av presentasjonen?
+value:,count:
+Veldig bra,6
+Bra,26
+Middels,5
+Dårlig,0
+Veldig dårlig,0
+
+question,Hvor mye visste du om bedriften før presentasjonen?
+value:,count:
+Veldig mye,0
+Mye,4
+Noe,14
+Lite,12
+Veldig lite,7
+
+question,Hva vet du om bedriften etter presentasjonen?
+value:,count:
+Lite,1
+Veldig lite,0
+Veldig mye,2
+Mye,24
+Noe,10
+
+question,Hvordan var informasjonen om sommerjobber og ledige stillinger?
+value:,count:
+Svært god,3
+God,18
+Ok,12
+Mangelfull,3
+Svært mangelfull,1
+
+question,Hvordan fikk du høre om bedriftspresentasjonen? - Følg @abakusbedrift for oppdateringer om flere arrangementer!
+value:,count:
+#Weekly på abakus.no,2
+Abakus.no,31
+Annet,0
+Plakater,0
+Medlemmer av Bedkom,2
+Venner,10
+Facebook,1
+Plakater på campus,0
+Instagram - @abakusbedrift,2
+
+Om minglingen: Hva kunne vært bedre og hvordan?
+answer:
+Noen av bedreppene dro kanskje litt tidlig.
+"For få bedrepper, satt på bord uten
+(Mer mat til oss men lite kostnadseffektivt for dem). Snakket ikke med noen før siste halvtime"
+"Var en del bord uten en bedrep, inkludert oss. Dermed fikk ikke vi snakket med noen før utover kvelden."
+"Bedreppene var hyggelig men det var for få, og de som var roterte ikke og flere dro hjem tidlig. Satt ikke på bord med bedrepp selv om det var plass til en. Satt nesten hele kvelden uten å snakke med bedrepp, de kom bort på slutten og da var det gode samtaler. Men det var såpass sent at man ikke fikk mye ut av det."
+"Vet ikke om det kunne blitt litt kleint også, men hadde egentlig vært veldig nice hvis bedriftsrepresentantene satte seg ned først så man kunne velge hvem man satt på bord med."
+For små bord så ikke bedrepper på alle bor
+synes det var bra
+
+Om presentasjonen: Hva kunne vært bedre og hvordan?
+answer:
+Gjøre kansje litt mer spennende fortell historier. Ble litt mye hva bedrifter gjør og hvilke avdelinger de har
+"Kunne gjerne hatt enda mer eksempler fra hva man jobber med daglig. Følte alt ble litt opp i lufta, ikke så mye konkrete eksempler"
+Kunne gjerne tatt spørsmålene opp på storskjermen og oppfordret folk til å like de spørsmålene man syns var mest relevant.
+Det var synd at det ikke ble tid til å svare på alle spørsmål som ble sendt inn
+kanskje mat litt tidligere
+
+Hva kunne du tenke deg at bedriften skal prate om ved neste anledning?
+answer:
+At Hasse skal komme også<3
+Mer konkrete eksempler fra hva man kan jobbe med daglig
+Sikkerhetshendelser de har håndtert.
+Mer sikkerhet og læringsmuligheter i bedriften
+
+Har du noen sluttkommentarer om hva som var bra eller hva som kunne vært bedre? Spesifiser om det er til bedriften eller Bedkom.
+answer:
+Synes det var nice at bedriften hadde anonymt spørreforum til spørsmål. Bonus at de delte ut premier til gode spørsmål :)
+Maten var digg
+<script>alert('ingen kommentar')</script>
+

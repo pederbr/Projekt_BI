@@ -1,18 +1,20 @@
 {% extends "index.html" %} {% block title %}statistikk{% endblock  %}
 {% block content %}
 <h1>statistikk</h1>
-<ul class="navbar-nav">
-  <li class="nav-item active">
-    <a class="nav-link" href="#">VÅR 24</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">HØST 23</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">VÅR 23</a>
-  </li>
-</ul>
-<table border='1'>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    velg Semester
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">HØST 23</a>
+  </div>
+</div>
+<div>
+  <br>
+</div>
+<div class="table-responsive">
+
+  <table class="table table-sm" border="1">
     <tr>
       <th>dato</th>
       <th>Bedpres</th>
@@ -32,7 +34,6 @@
       <th>arbeidsvilkår</th>
       <th>vurdering av bedrift</th>
       <th>Slett bepres</th>
-
     </tr>
     {% for x in bedriftdata %}
       <tr>
@@ -56,11 +57,11 @@
         <td> 
           <form action="{% url 'del_bedpres' %}?id={{ x.id }}" method="post" style="display: inline;">
             {% csrf_token %}
-            <input type="hidden" name="id" value="{{ x.id }}" />
-            <button type="submit" class="btn btn-default btn-sm" onclick="return confirm('sikker på at du vil slette denne?');">slett</button>
+            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('sikker på at du vil slette denne?');">slett</button>
           </form>
         </td>
       </tr>
     {% endfor %}
   </table>
+</div>
 {% endblock  %}

@@ -1,10 +1,12 @@
 {% extends "index.html" %} {% block title %}last opp fil{% endblock  %}
 {% block content %}
 
+{% load crispy_forms_tags %}
+
     <h1>last opp CSV-fil fra bedrift</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit" class="btn btn-primary">last opp fil </button>
     </form>
 
