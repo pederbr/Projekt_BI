@@ -1,16 +1,25 @@
 from django import forms
-from .models import opplastede_filer
+from numpy import true_divide
+from .models import opplastede_filer, semestere, bedrift_data
 import pandas as pd
+import datetime as dt
 
 class filForm(forms.ModelForm):
     class Meta:
         model = opplastede_filer
-        fields = ["navn", "fil"]
+        fields = ["navn", "fil", "dato_bedpres"]
+        widgets = {
+        'dato_bedpres': forms.DateInput(
+            attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control'}
+        )
+        }
 
-def avg_values(filename:str)->tuple:
+def check_semester():
+    for semester in semestere.objects.all():
+        if not bedrift_data.objects.filter(semester=semester).exists():
+            semestere.objects.filter(semester=semester).delete()
 
-    df = pd.read_csv(filename)
-
+def process_csv(df)->tuple:
     #svarene på enten/eller spm
     q_list_1=[   
     df.loc[1:2],    #prosentandel kvinner
@@ -49,13 +58,30 @@ def avg_values(filename:str)->tuple:
         question=elem.values.tolist()
         summ = 0
         votes = 0
-        for index, score in enumerate(question):
-            points = 5-index
-            votes += int(score[1])
-            summ += points*int(score[1])
-        temp1.append(round((summ/votes),2))
+        try:
+            for index, score in enumerate(question):
+                points = 5-index
+                votes += int(score[1])
+                summ += points*int(score[1])
+            temp1.append(round((summ/votes),2))
+        except:
+            temp1.append(temp1[len(temp1)-1])
+
 
     average_score_questions=tuple(temp+temp1)
     return average_score_questions
 
 
+def get_semester(date_str:str)->str:
+    date=dt.datetime.strptime(date_str, "%Y-%m-%d").date()
+    year=str(date.year)
+    semester=""
+    if date.month in [1,2,3,4,5,6]:
+        semester="v"+year[2:4]
+    elif date.month in [7,8,9,10,11,12]:
+        semester="h"+year[2:4]
+    if semester:
+        obj, created = semestere.objects.get_or_create(semester=semester)
+        if created:
+            obj.save()
+    return semester
