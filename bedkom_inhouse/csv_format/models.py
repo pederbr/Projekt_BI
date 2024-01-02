@@ -7,6 +7,7 @@ class opplastede_filer(models.Model):
     fil = models.FileField()
     dato_bedpres = models.DateField()
     dato_lagret = models.DateTimeField(default = datetime.now())
+    lunsjpres = models.BooleanField(default=False)
     def __str__(self):
         return self.navn
 

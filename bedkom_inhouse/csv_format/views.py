@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect, render
 from .models import bedrift_data, semestere
-from .forms import filForm, process_csv, get_semester, check_semester
+from .forms import filForm
+from .utils import process_csv_for_table, get_semester, check_semester
 import pandas as pd
 from django.contrib import messages
 
@@ -18,10 +19,11 @@ def upload(request):
     print(request.POST["dato_bedpres"])
     if form.is_valid():
       document=form.save()
+      lunsjpres = form.cleaned_data['lunsjpres']
       try:
         dataframe = pd.read_csv(document.fil)
         try:
-          tp = process_csv(dataframe)
+          tp = process_csv_for_table(dataframe, lunsjpres)
           if len(tp)==15: #sjekker om fila er behandlet på riktig måte
               new_entry=bedrift_data( #laster opp data fra tuplen til modellen
                 dato_bedpres = request.POST["dato_bedpres"],

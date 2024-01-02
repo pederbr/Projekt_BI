@@ -104,18 +104,25 @@ Ok,10
 Mangelfull,1
 Svært mangelfull,0
 
-question,Hvordan fikk du høre om bedriftspresentasjonen?
+question,Hvordan fikk du høre om bedriftspresentasjonen? - Følg @abakusbedrift for oppdateringer om flere arrangementer!
 value:,count:
-Annet,0
 #Weekly på abakus.no,0
-Abakus.no,19
+Abakus.no,0
+Annet,0
 Plakater,0
-Medlemmer av Bedkom,1
-Venner,4
+Medlemmer av Bedkom,0
+Venner,0
 Facebook,0
 Plakater på campus,0
-Instagram,0
+Instagram - @abakusbedrift,0
 
+question,Hva er ditt helhetsinntrykk av arrangementet?
+value:,count:
+5 - veldig bra,5
+4,4
+3,3
+2,2
+1 - veldig dårlig,1
 Om presentasjonen: Hva kunne vært bedre og hvordan?
 answer:
 Forklar mer om de ulike retningene man kunne gå. Hva er customer success? Hva vil man gjøre vanlig arbeidsdag?
