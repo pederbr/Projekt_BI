@@ -19,7 +19,7 @@ def check_semester():
         if not bedrift_data.objects.filter(semester=semester).exists():
             semestere.objects.filter(semester=semester).delete()
 
-def process_csv(df)->tuple:
+def process_csv_for_table(df, lunspres:bool)->tuple:
     #svarene på enten/eller spm
     q_list_1=[   
     df.loc[1:2],    #prosentandel kvinner
@@ -34,23 +34,34 @@ def process_csv(df)->tuple:
         ans2=int(question[1][1])
         temp.append(round((ans1/(ans1+ans2)),2))
 
-
-
-    #svarene på veldig_bra til veldig_dårlig spørsmålene
-    q_list=[
-    df.loc[10:14],  #fordeling_klassetrinn
-    df.loc[72:76],  #fremforing_presentasjon
-    df.loc[65:69],  #innhold_presentasjon
-    df.loc[79:83],  #kunnskap_bedrift_pre
-    df.loc[86:90],  #kunnskap_bedrift_post
-    df.loc[93:97],  #info_jobb
-    df.loc[58:62],  #mingling
-    df.loc[17:21],  #intterresant_arbeid
-    df.loc[33:37],  #sosialt_miljø
-    df.loc[44:48],  #arbeidsvilkår
-    df.loc[51:55],  #helhetsvurdering_bedrift
-    df.loc[111:115]]#inntrykk_arrangement
-    
+        #svarene på veldig_bra til veldig_dårlig spørsmålene
+    if lunspres:
+        q_list=[
+        df.loc[10:14],  #fordeling_klassetrinn
+        df.loc[65:69],  #fremforing_presentasjon
+        df.loc[72:76],  #kunnskap_bedrift_pre
+        df.loc[79:83],  #kunnskap_bedrift_post
+        df.loc[86:90],  #info_jobb
+        df.loc[58:62],  #innhold_presentasjon
+        df.loc[17:21],  #intterresant_arbeid
+        df.loc[33:37],  #sosialt_miljø
+        df.loc[44:48],  #arbeidsvilkår
+        df.loc[51:55],  #helhetsvurdering_bedrift
+        df.loc[104:108]]#inntrykk_arrangement
+    else:
+        q_list=[
+        df.loc[10:14],  #fordeling_klassetrinn
+        df.loc[72:76],  #fremforing_presentasjon
+        df.loc[65:69],  #innhold_presentasjon
+        df.loc[79:83],  #kunnskap_bedrift_pre
+        df.loc[86:90],  #kunnskap_bedrift_post
+        df.loc[93:97],  #info_jobb
+        df.loc[58:62],  #mingling
+        df.loc[17:21],  #intterresant_arbeid
+        df.loc[33:37],  #sosialt_miljø
+        df.loc[44:48],  #arbeidsvilkår
+        df.loc[51:55],  #helhetsvurdering_bedrift
+        df.loc[111:115]]#inntrykk_arrangement
 
     #gjør om svarene til gjennomsnitt og setter de inn i en tuppel i samme rekkefølge som i q_list
     temp1=[]
@@ -66,7 +77,8 @@ def process_csv(df)->tuple:
             temp1.append(round((summ/votes),2))
         except:
             temp1.append(temp1[len(temp1)-1])
-
+    if lunspres:
+        temp1.insert(6, 0) #legger til 0 i listen for siden lunsjpreser ikke har mingling
 
     average_score_questions=tuple(temp+temp1)
     return average_score_questions
