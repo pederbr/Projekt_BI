@@ -1,7 +1,8 @@
 from .models import semestere, bedrift_data
 import pandas as pd
 import datetime as dt
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+
 
 
 def check_semester():
@@ -152,22 +153,25 @@ def get_semester(date_str:str)->str:
             obj.save()
     return semester
 
-def draw_bar(data):
-   labels = [x[0] for x in data]
-   values = [x[1] for x in data]
-   fig, ax = plt.subplots()
-   ax.bar(labels, values)
-   ax.set_ylim([0, 30])
-   ax.set_ylabel('Antall')
-   plt.xticks(rotation=45, ha='right')  # Rotate labels
-   plt.show()
-
 def draw_pie(data):
-   labels = [x[0] for x in data]
-   sizes = [x[1] for x in data]
-   fig, ax = plt.subplots()
-   ax.pie(sizes, labels=labels, autopct=lambda p: '{:.0f}'.format(p * sum(sizes) / 100), startangle=90, pctdistance=0.85)
-   centre_circle = plt.Circle((0,0),0.25,fc='white') # Draw a circle at the center
-   fig.gca().add_artist(centre_circle)
-   ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-   plt.show()
+    labels = [x[0] for x in data]
+    values = [x[1] for x in data]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])  # hole parameter creates the donut shape
+    fig.update_layout(
+        autosize=False,
+        width=1000,
+        height=500,
+        )
+    return fig.to_html()
+
+def draw_bar(data):
+    labels = [x[0] for x in data]
+    values = [x[1] for x in data]
+    fig = go.Figure(data=[go.Bar(x=labels, y=values)])
+    fig.update_layout(
+        yaxis=dict(range=[0, 30]),  # Set the range of y-axis
+        autosize=False,
+        width=1000,
+        height=500,
+    )
+    return fig.to_html()
