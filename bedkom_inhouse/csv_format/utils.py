@@ -1,3 +1,5 @@
+from tkinter import font
+from turtle import title
 from .models import semestere, bedrift_data
 import pandas as pd
 import datetime as dt
@@ -9,6 +11,8 @@ def check_semester():
     for semester in semestere.objects.all():
         if not bedrift_data.objects.filter(semester=semester).exists():
             semestere.objects.filter(semester=semester).delete()
+
+
 
 def process_csv_for_table(df, lunspres:bool)->tuple:
     #svarene på enten/eller spm
@@ -75,13 +79,13 @@ def process_csv_for_table(df, lunspres:bool)->tuple:
     return average_score_questions
 
 
+
 def process_csv_for_graph(df, lunspres:bool)->list:
     #svarene på enten/eller spm
     q_list_1=[   
     df.loc[1:2],    #kvinner/menn
     df.loc[6:7],    # data/komtek
     df.loc[40:41]]  #kunne tenke seg å jobbe der
-
 
     out_list_1=[]
     for elem in q_list_1:
@@ -108,7 +112,6 @@ def process_csv_for_graph(df, lunspres:bool)->list:
         df.loc[51:55],  #helhetsvurdering_bedrift
         df.loc[104:108],#inntrykk_arrangement
         df.loc[24:30]]  #hva bedriften tilbyr
-
     else:
         q_list=[
         df.loc[10:14],  #fordeling_klassetrinn
@@ -123,9 +126,8 @@ def process_csv_for_graph(df, lunspres:bool)->list:
         df.loc[44:48],  #arbeidsvilkår
         df.loc[51:55],  #helhetsvurdering_bedrift
         df.loc[111:115],#inntrykk_arrangement
-        df.loc[24:30]]  #hva bedriften tilbyr
+        df.loc[24:30]]  #hva bedriften tilbyr   
 
-    
     out_list_2=[]
     for elem in q_list:
         question=elem.values.tolist()
@@ -134,10 +136,10 @@ def process_csv_for_graph(df, lunspres:bool)->list:
             if type(elem[1]) == str:
                 temp.append(tuple([elem[0] ,int(elem[1])] ) )
         if temp:
-            out_list_2.append(temp)
-    print()
-    
+            out_list_2.append(temp)   
     return out_list_1 + out_list_2
+
+
 
 def get_semester(date_str:str)->str:
     date=dt.datetime.strptime(date_str, "%Y-%m-%d").date()
@@ -153,7 +155,9 @@ def get_semester(date_str:str)->str:
             obj.save()
     return semester
 
-def draw_pie(data):
+
+
+def draw_pie(data, graph_title):
     labels = [x[0] for x in data]
     values = [x[1] for x in data]
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])  # hole parameter creates the donut shape
@@ -161,17 +165,32 @@ def draw_pie(data):
         autosize=False,
         width=1000,
         height=500,
-        )
+        title={
+            "text": graph_title,
+            "font_size" : 24, 
+            "xanchor" : 'center', 
+            "x" : 0.5,
+            "yanchor" : 'top', 
+            "y": 0.9,
+        })
     return fig.to_html()
 
-def draw_bar(data):
+
+
+def draw_bar(data, graph_title):
     labels = [x[0] for x in data]
     values = [x[1] for x in data]
     fig = go.Figure(data=[go.Bar(x=labels, y=values)])
     fig.update_layout(
-        yaxis=dict(range=[0, 30]),  # Set the range of y-axis
         autosize=False,
         width=1000,
         height=500,
+        title={
+            "text": graph_title,
+            "font_size" : 24, 
+            "xanchor" : 'center', 
+            "x" : 0.5,
+            "yanchor" : 'top', 
+            "y": 0.9,}
     )
     return fig.to_html()

@@ -9,14 +9,13 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1>penis</h1>
-        <div>
-            {% block content %}
-                {% for chart in list_of_graphs %}
-                    {{ chart|safe }}
-                {% endfor %}            
-            {% endblock content %}
-        </div>
+        {% block content %}
+        <h1>Bedrift: {{name}}</h1>
+        <h2>Dato: {{date}}</h2>
+            {% for chart in list_of_graphs %}
+                {{ chart|safe }}
+            {% endfor %}            
+        {% endblock content %}
         <script src="" async defer></script>
     </body>
 </html>

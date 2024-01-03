@@ -13,6 +13,8 @@ def home(request):
   template = loader.get_template('index.html')
   return HttpResponse(template.render())
 
+
+
 def upload(request):
   form=filForm() 
   if request.method == "POST":
@@ -46,7 +48,6 @@ def upload(request):
                 arbeidsvilkår = tp[12], 
                 helhetsvurdering = tp[13], 
                 inntrykk_arrangement = tp[14]
-
                 )
               new_entry.save()
               return redirect("statistikk")
@@ -59,6 +60,7 @@ def upload(request):
         messages.error(request, "feil filformat.")
         return redirect("upload")
   return render(request, "upload.html", {"form": form})
+
 
 
 def statistikk(request):
@@ -76,6 +78,8 @@ def statistikk(request):
   }
   return HttpResponse(template.render(context, request))
 
+
+
 def del_bedpres(request):
   id = int(request.GET.get('id'))
   try:
@@ -85,6 +89,8 @@ def del_bedpres(request):
       pass
   check_semester()
   return redirect("statistikk")
+
+
 
 def statistikk_mal(request):
   lunsjpres = False
@@ -106,22 +112,22 @@ def statistikk_mal(request):
       return HttpResponse(f"Error processing CSV file: {e}")
   try:
     list_of_graphs = [
-      draw_pie(data[0]),    #kvinner/menn
-      draw_pie(data[1]),    #retning
-      draw_bar(data[3]),    #klassetrinn
-      draw_bar(data[6]),    #kunnskap_bedrift_pre
-      draw_bar(data[7]),    #kunnskap_bedrift_post
-      draw_pie(data[2]),    #kunne tenke seg å jobbe der
-      draw_bar(data[-6]),   #intterresant_arbeid
-      draw_bar(data[-1]),   #hva bedriften tilbyr
-      draw_bar(data[-4]),   #arbeidsvilkår
-      draw_bar(data[4]),    #fremforing_presentasjon
-      draw_bar(data[5]),    #innhold_presentasjon
-      draw_bar(data[8]),    #info_jobb
-      draw_bar(data[9]),    #mingling
-      draw_bar(data[-5]),   #sosialt_miljø
-      draw_bar(data[-3]),   #helhetsvurdering_bedrift
-      draw_bar(data[-2])]  #helhetsvurdering_arrangement
+      draw_pie(data[0], "Kjønnsfordeling"),    #/mennkvinner
+      draw_pie(data[1], "Linjefordeling"),    #retning
+      draw_bar(data[3], "Klassefordeling"),    #klassetrinn
+      draw_bar(data[6], "Hvor mye visste du om bedriften før presentasjonen?"),    #kunnskap_bedrift_pre
+      draw_bar(data[7], "Hva vet du om bedriften etter presentasjonen?"),    #kunnskap_bedrift_post
+      draw_pie(data[2], "Kunne du tenke deg å jobbe for denne bedriften?"),    #kunne tenke seg å jobbe der
+      draw_bar(data[-6],"Virker de daglige arbeidsoppgavene til bedriften interresante?"),   #intterresant_arbeid
+      draw_bar(data[-1],"Hvilke av disse egenskapene tror du bedriften kan tilby?"),   #hva bedriften tilbyr
+      draw_bar(data[-4],"Hva er ditt inntrykk av arbeidsvilkårene til bedriften?"),   #arbeidsvilkår
+      draw_bar(data[4], "Hva synes du om fremføringen av presentasjonen?"),    #fremforing_presentasjon
+      draw_bar(data[5], "Hva synes du om innholdet i presentasjonen?"),    #innhold_presentasjon
+      draw_bar(data[8], "Hvordan var informasjonen om sommerjobber og ledige stillinger"),    #info_jobb
+      draw_bar(data[9], "Hvordan gikk minglingen etter presentasjonen?"),    #mingling
+      draw_bar(data[-5],"Hva er ditt inntrykk av det sosiale miljøet i bedriften?"),   #sosialt_miljø
+      draw_bar(data[-3],"Hva er din helhetsvurdering av bedriften?"),   #helhetsvurdering_bedrift
+      draw_bar(data[-2],"Hva er din helhetsvurdering av arrangementet?")]  #helhetsvurdering_arrangement
   except Exception as e:
     return HttpResponse(f"Error drawing graphs: {e}")
   try:
@@ -129,6 +135,8 @@ def statistikk_mal(request):
   except TemplateDoesNotExist:
       return HttpResponse("Template not found.")
   context = {
-      'list_of_graphs': list_of_graphs
+      'list_of_graphs': list_of_graphs,
+      'name': file_data.navn,
+      'date': file_data.dato_bedpres,
   }
   return HttpResponse(template.render(context, request))
