@@ -60,6 +60,10 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('sikker på at du vil bedpressen ved navn {{x.navn_bedrift}}?');">slett</button>
           </form>
+          <form action="{% url 'statistikk_mal' %}?id={{ x.id_opplastede_filer }}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm">vis grafer</button>
+          </form>
         </td>
       </tr>
     {% endfor %}

@@ -47,7 +47,8 @@ def upload(request):
                 sosialt_miljø = tp[11], 
                 arbeidsvilkår = tp[12], 
                 helhetsvurdering = tp[13], 
-                inntrykk_arrangement = tp[14]
+                inntrykk_arrangement = tp[14],
+                id_opplastede_filer = document.id,
                 )
               new_entry.save()
               return redirect("statistikk")

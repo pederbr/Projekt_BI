@@ -173,7 +173,7 @@ def draw_pie(data, graph_title):
             "yanchor" : 'top', 
             "y": 0.9,
         })
-    return fig.to_html()
+    return fig.to_image(format="png")
 
 
 
@@ -193,4 +193,4 @@ def draw_bar(data, graph_title):
             "yanchor" : 'top', 
             "y": 0.9,}
     )
-    return fig.to_html()
+    return fig.to_image(format="png")

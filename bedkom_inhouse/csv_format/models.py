@@ -17,6 +17,7 @@ class semestere(models.Model):
         return self.semester
 
 class bedrift_data(models.Model):
+    id_opplastede_filer = models.IntegerField()
     dato_bedpres = models.DateField()
     semester= models.CharField(max_length=255, default="h23")
     navn_bedrift = models.CharField(max_length=255)
