@@ -1,4 +1,3 @@
-test_filer
 
 # Django #
 *.log
@@ -6,7 +5,6 @@ test_filer
 *.pyc
 __pycache__
 db.sqlite3
-media
 CSV
 
 
