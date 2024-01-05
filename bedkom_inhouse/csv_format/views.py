@@ -84,3 +84,6 @@ def del_bedpres(request):
   check_semester()
   return redirect("statistikk")
 
+def diagram_view(request):
+    # Logikken for å hente og sende data til diagram-siden
+    return render(request, 'diagram.html')  # Pass på at 'diagram.html' eksisterer

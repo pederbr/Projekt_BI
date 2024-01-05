@@ -8,6 +8,7 @@ urlpatterns = [
     path('statistikk', views.statistikk, name='statistikk'),
     path('upload', views.upload, name='upload'),
     path('del_bedpres/', views.del_bedpres, name='del_bedpres'),
+    path('diagram/', views.diagram_view, name='diagram'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
