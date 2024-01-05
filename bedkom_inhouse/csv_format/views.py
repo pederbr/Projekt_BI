@@ -63,7 +63,7 @@ def statistikk(request):
   if request.GET.get('id'):
     semester = (request.GET.get('id'))
   else: 
-    semester = "v24"
+    semester = "Velg semester"
   bedriftdata = bedrift_data.objects.filter(semester=semester)
   alle_semestre = semestere.objects.all()
   template = loader.get_template('statistikk.html')
