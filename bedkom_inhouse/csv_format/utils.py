@@ -1,9 +1,13 @@
 from tkinter import font
 from turtle import title
+
+from matplotlib.pyplot import margins, subplot
 from .models import semestere, bedrift_data
 import pandas as pd
 import datetime as dt
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.io as pio
 
 
 
@@ -157,40 +161,78 @@ def get_semester(date_str:str)->str:
 
 
 
-def draw_pie(data, graph_title):
+def draw_pie(data):
     labels = [x[0] for x in data]
     values = [x[1] for x in data]
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])  # hole parameter creates the donut shape
-    fig.update_layout(
-        autosize=False,
-        width=1000,
-        height=500,
-        title={
-            "text": graph_title,
-            "font_size" : 24, 
-            "xanchor" : 'center', 
-            "x" : 0.5,
-            "yanchor" : 'top', 
-            "y": 0.9,
-        })
-    return fig.to_image(format="png")
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3, textinfo='label+percent')])  # hole parameter creates the donut shape
+    return fig
 
 
-
-def draw_bar(data, graph_title):
+def draw_bar(data):
     labels = [x[0] for x in data]
     values = [x[1] for x in data]
     fig = go.Figure(data=[go.Bar(x=labels, y=values)])
-    fig.update_layout(
-        autosize=False,
-        width=1000,
-        height=500,
-        title={
-            "text": graph_title,
-            "font_size" : 24, 
-            "xanchor" : 'center', 
-            "x" : 0.5,
-            "yanchor" : 'top', 
-            "y": 0.9,}
-    )
-    return fig.to_image(format="png")
+    return fig
+
+def create_html(data, name):
+    subplot_types = [
+        [{ "type":'domain' }], 
+        [{ "type":'domain' }], 
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'domain' }], 
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }],
+        [{ "type":'xy' }]]
+    subplot_titles = [
+        "Kjønnsfordeling",
+        "Linjefordeling",
+        "klassefordeling",
+        "Hvor mye visste du om bedriften før presentasjonen?",
+        "Hva vet du om bedriften etter presentasjonen?",
+        "Kunne du tenke deg å jobbe for denne bedriften?",
+        "Virker de daglige arbeidsoppgavene til bedriften interresante?",
+        "hvilke av disse egenskapene tror du bedriften kan tilby?",
+        "Hva er ditt inntrykk av arbeidsvilkårene til bedriften?",
+        "Hva synes du om fremføringen av presentasjonen?",
+        "Hva synes du om innholdet i presentasjonen?",
+        "Hvordan var informasjonen om sommerjobber og ledige stillinger",
+        "Hvordan gikk minglingen etter presentasjonen?",
+        "Hva er ditt inntrykk av det sosiale miljøet i bedriften?",
+        "Hva er din helhetsvurdering av bedriften?",
+        "Hva er din helhetsvurdering av arrangementet?"]
+    fig = make_subplots(
+        rows=16, cols=1, 
+        specs=subplot_types, 
+        subplot_titles=subplot_titles, 
+        vertical_spacing=0.03,
+        x_title="Antall svar")     
+    list_of_graphs = [
+        draw_pie(data[0]),    #/mennkvinner
+        draw_pie(data[1]),    #retning
+        draw_bar(data[3]),    #klassetrinn
+        draw_bar(data[6]),    #kunnskap_bedrift_pre
+        draw_bar(data[7]),    #kunnskap_bedrift_post
+        draw_pie(data[2]),    #kunne tenke seg å jobbe der
+        draw_bar(data[-6]),   #intterresant_arbeid
+        draw_bar(data[-1]),   #hva bedriften tilbyr
+        draw_bar(data[-4]),   #arbeidsvilkår
+        draw_bar(data[4]),    #fremforing_presentasjon
+        draw_bar(data[5]),    #innhold_presentasjon
+        draw_bar(data[8]),    #info_jobb
+        draw_bar(data[9]),    #mingling
+        draw_bar(data[-5]),   #sosialt_miljø
+        draw_bar(data[-3]),   #helhetsvurdering_bedrift
+        draw_bar(data[-2])]   #helhetsvurdering_arrangement
+    for i, graph in enumerate(list_of_graphs, start=1):
+        fig.add_trace(graph.data[0], row=i, col=1)
+    fig.update_layout(height=6000, width=842, title_text=name, showlegend=False)
+    fig.show()
