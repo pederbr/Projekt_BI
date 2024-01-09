@@ -164,15 +164,14 @@ def get_semester(date_str:str)->str:
 def draw_pie(data):
     labels = [x[0] for x in data]
     values = [x[1] for x in data]
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3, textinfo='label+percent')])  # hole parameter creates the donut shape
-    return fig
+    return go.Pie(labels=labels, values=values, hole=.3, textinfo='label+percent')  # hole parameter creates the donut shape)
+     
 
 
 def draw_bar(data):
     labels = [x[0] for x in data]
     values = [x[1] for x in data]
-    fig = go.Figure(data=[go.Bar(x=labels, y=values)])
-    return fig
+    return go.Bar(x=labels, y=values)
 
 def create_html(data, name):
     subplot_types = [
@@ -213,8 +212,7 @@ def create_html(data, name):
         rows=16, cols=1, 
         specs=subplot_types, 
         subplot_titles=subplot_titles, 
-        vertical_spacing=0.03,
-        x_title="Antall svar")     
+        vertical_spacing=0.03)
     list_of_graphs = [
         draw_pie(data[0]),    #/mennkvinner
         draw_pie(data[1]),    #retning
@@ -232,7 +230,7 @@ def create_html(data, name):
         draw_bar(data[-5]),   #sosialt_miljø
         draw_bar(data[-3]),   #helhetsvurdering_bedrift
         draw_bar(data[-2])]   #helhetsvurdering_arrangement
-    for i, graph in enumerate(list_of_graphs, start=1):
-        fig.add_trace(graph.data[0], row=i, col=1)
     fig.update_layout(height=6000, width=842, title_text=name, showlegend=False)
+    for i in range(len((list_of_graphs))):
+        fig.add_trace(list_of_graphs[i], row=i+1, col=1, )
     fig.show()
