@@ -1,16 +1,19 @@
+import re
 from urllib import request
-from django.http import HttpResponse
-from django.template import loader
+from django.http import HttpResponse, Http404
+from django.template import loader, TemplateDoesNotExist
 from django.shortcuts import redirect, render
-from .models import bedrift_data, semestere
+from .models import bedrift_data, opplastede_filer, semestere
 from .forms import filForm
-from .utils import process_csv_for_table, get_semester, check_semester
+from .utils import *
 import pandas as pd
 from django.contrib import messages
 
 def home(request):
   template = loader.get_template('index.html')
   return HttpResponse(template.render())
+
+
 
 def upload(request):
   form=filForm() 
@@ -21,6 +24,7 @@ def upload(request):
       document=form.save()
       lunsjpres = form.cleaned_data['lunsjpres']
       try:
+        print(document.fil)
         dataframe = pd.read_csv(document.fil)
         try:
           tp = process_csv_for_table(dataframe, lunsjpres)
@@ -43,8 +47,8 @@ def upload(request):
                 sosialt_miljø = tp[11], 
                 arbeidsvilkår = tp[12], 
                 helhetsvurdering = tp[13], 
-                inntrykk_arrangement = tp[14]
-
+                inntrykk_arrangement = tp[14],
+                id_opplastede_filer = document.id,
                 )
               new_entry.save()
               return redirect("statistikk")
@@ -57,6 +61,7 @@ def upload(request):
         messages.error(request, "feil filformat.")
         return redirect("upload")
   return render(request, "upload.html", {"form": form})
+
 
 
 def statistikk(request):
@@ -74,6 +79,8 @@ def statistikk(request):
   }
   return HttpResponse(template.render(context, request))
 
+
+
 def del_bedpres(request):
   id = int(request.GET.get('id'))
   try:
@@ -84,3 +91,28 @@ def del_bedpres(request):
   check_semester()
   return redirect("statistikk")
 
+
+
+def statistikk_mal(request):
+  lunsjpres = False
+  if request.GET.get('id'):
+    id = (request.GET.get('id'))
+  else: 
+    id = 1
+  try:
+      file_data = opplastede_filer.objects.get(id=id)
+  except opplastede_filer.DoesNotExist:
+      raise Http404("File not found.")
+  try:
+      dataframe = pd.read_csv(file_data.fil.path)
+  except pd.errors.ParserError:
+      return HttpResponse("Error reading CSV file.")
+  try:
+      data = process_csv_for_graph(dataframe, lunsjpres)
+  except Exception as e:
+      return HttpResponse(f"Error processing CSV file: {e}")
+  try:
+      create_html(data, file_data.navn)
+  except Exception as e:
+      return HttpResponse(f"Error creating graph: {e}")
+  return redirect("statistikk")
